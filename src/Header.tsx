@@ -2,7 +2,8 @@ import { Box, Container, useTheme, Link, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from './img/logo.svg';
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useCycle } from 'framer-motion';
+import { motion, useCycle } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
 const Header = () => {
   const theme = useTheme();
@@ -15,6 +16,25 @@ const Header = () => {
 
   const handleClick = () => {
     setOpenMenu();
+  };
+
+  const variants: Variants = {
+    open: {
+      opacity: 1,
+      visibility: 'visible',
+    },
+    closed: {
+      opacity: 0,
+      visibility: 'hidden',
+      transition: {
+        opacity: {
+          duration: 0.3,
+        },
+        visibility: {
+          delay: 0.3,
+        },
+      },
+    },
   };
 
   useEffect(() => {
@@ -67,71 +87,67 @@ const Header = () => {
         >
           <Box component="img" src={logo} alt="conquering responsive layouts" />
         </Link>
-        <AnimatePresence exitBeforeEnter initial={false}>
+        <Box
+          component={motion.div}
+          animate={smallUp ? 'open' : isOpenMenu ? 'open' : 'closed'}
+          variants={variants}
+          sx={{
+            position: smallUp ? 'static' : 'absolute',
+            top: `${headerHeight}px`,
+            right: 0,
+            left: 0,
+            backgroundColor: smallUp
+              ? 'transparent'
+              : `${theme.palette.primary.main}`,
+            padding: smallUp ? '0' : '0 2em 1em',
+            flex: 1,
+            marginLeft: smallUp ? '1em' : 0,
+          }}
+        >
           <Box
-            component={motion.div}
-            animate={{
-              opacity: smallUp ? 1 : isOpenMenu ? 1 : 0,
-            }}
+            component="nav"
             sx={{
-              position: smallUp ? 'static' : 'absolute',
-              top: `${headerHeight}px`,
-              right: 0,
-              left: 0,
-              backgroundColor: smallUp
-                ? 'transparent'
-                : `${theme.palette.primary.main}`,
-              padding: smallUp ? '0' : '0 2em 1em',
-              flex: 1,
-              marginLeft: smallUp ? '1em' : 0,
-              zIndex: smallUp ? 'initial' : isOpenMenu ? 'initial' : -1,
+              display: smallUp ? 'flex' : 'block',
+              justifyContent: 'space-between',
             }}
           >
             <Box
-              component="nav"
+              component="ul"
               sx={{
                 display: smallUp ? 'flex' : 'block',
-                justifyContent: 'space-between',
+                '& > li + li ': {
+                  marginLeft: smallUp ? '1em' : 0,
+                },
               }}
             >
-              <Box
-                component="ul"
-                sx={{
-                  display: smallUp ? 'flex' : 'block',
-                  '& > li + li ': {
-                    marginLeft: smallUp ? '1em' : 0,
-                  },
-                }}
-              >
-                <Box component="li">
-                  <Link href="#">Home</Link>
-                </Box>
-                <Box component="li">
-                  <Link href="#">About</Link>
-                </Box>
-                <Box component="li">
-                  <Link href="#">Contact</Link>
-                </Box>
+              <Box component="li">
+                <Link href="#">Home</Link>
               </Box>
-              <Box
-                component="ul"
-                sx={{
-                  display: smallUp ? 'flex' : 'block',
-                  '& > li + li ': {
-                    marginLeft: smallUp ? '1em' : 0,
-                  },
-                }}
-              >
-                <Box component="li">
-                  <Link href="#">Sign In</Link>
-                </Box>
-                <Box component="li">
-                  <Link href="#">Sign Up</Link>
-                </Box>
+              <Box component="li">
+                <Link href="#">About</Link>
+              </Box>
+              <Box component="li">
+                <Link href="#">Contact</Link>
+              </Box>
+            </Box>
+            <Box
+              component="ul"
+              sx={{
+                display: smallUp ? 'flex' : 'block',
+                '& > li + li ': {
+                  marginLeft: smallUp ? '1em' : 0,
+                },
+              }}
+            >
+              <Box component="li">
+                <Link href="#">Sign In</Link>
+              </Box>
+              <Box component="li">
+                <Link href="#">Sign Up</Link>
               </Box>
             </Box>
           </Box>
-        </AnimatePresence>
+        </Box>
       </Container>
     </Box>
   );
