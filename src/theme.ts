@@ -3,45 +3,54 @@ import { createTheme } from '@mui/material/';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#824936',
+      main: '#136c72',
     },
     secondary: {
-      main: '#f3eed9',
+      main: '#23424a',
+    },
+    info: {
+      main: '#38cfd9',
     },
   },
   typography: {
-    fontFamily: ['Playfair Display', 'Roboto', 'serif'].join(','),
+    fontFamily: ['Roboto', 'serif'].join(','),
     body1: {
       color: '#222c2a',
       lineHeight: 1.6,
-      minHeight: '100vh',
+      fontSize: '1.3125rem',
     },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: `
+        body {
+          min-height: 100vh;
+        },
         h1 {
-          font-size: clamp(28px, 3vw, 32px);
+          font-size: clamp(2rem, 4vw, 3rem);
           margin-top: 0;
         },
         h2 {
-          font-size: clamp(20px, 2.25vw, 24px);
+          font-size: clamp(1.5rem, 3vw, 2rem);
           margin-top: 0;
         },
         p {
-          font-size: clamp(14px, 1.5vw, 16px);
+          font-size: clamp(1rem, 1.5vw, 1.3125rem);
         },
         img {
-          width: 100%;
+          max-width: 100%;
+        },
+        ul {
+          list-style: none;
+          padding-left: 0;
+          margin: 0
+        },
+        li {
+          font-size: clamp(1rem, 1.5vw, 1.3125rem);
+        },
+        a {
+          color: #fff!important
         }
-      `,
-    },
-    MuiContainer: {
-      styleOverrides: `
-      div {
-        padding-right: 2em;
-        padding-left: 2em;
-      }
       `,
     },
   },

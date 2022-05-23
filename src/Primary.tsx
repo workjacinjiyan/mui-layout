@@ -1,7 +1,7 @@
 import { Box, Container, useMediaQuery, useTheme } from '@mui/material';
-import image02 from './img/image-02.jpg';
+import image02 from './img/hero-img.jpg';
 
-const Section4 = () => {
+const Primary = () => {
   const theme = useTheme();
   const small = useMediaQuery(theme.breakpoints.up('sm'));
   // const medium = useMediaQuery(theme.breakpoints.up('md'));
@@ -47,4 +47,4 @@ const Section4 = () => {
   );
 };
 
-export default Section4;
+export default Primary;

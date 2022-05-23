@@ -1,17 +1,17 @@
 import { Fragment } from 'react';
 
-import Intro from './Intro';
-import Section2 from './Section-2';
-import Section3 from './Section-3';
-import Section4 from './Section-4';
+import Header from './Header';
+import Hero from './Hero';
+import Aside from './Aside';
+import Primary from './Primary';
 
 export default function App() {
   return (
     <Fragment>
-      <Intro />
-      <Section2 />
-      <Section3 />
-      <Section4 />
+      <Header />
+      <Hero />
+      <Aside />
+      <Primary />
     </Fragment>
   );
 }
