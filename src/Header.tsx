@@ -26,7 +26,7 @@ const Header = () => {
     setOpenMenu();
   };
 
-  const variants: Variants = {
+  const navWrapperVariants: Variants = {
     open: {
       opacity: 1,
       visibility: 'visible',
@@ -43,6 +43,26 @@ const Header = () => {
         },
       },
     },
+  };
+
+  const ulVariants = {
+    open: {
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.3,
+      },
+    },
+    closed: {
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const liVariants = {
+    open: { opacity: 1 },
+    closed: { opacity: 0 },
   };
 
   useEffect(() => {
@@ -89,14 +109,14 @@ const Header = () => {
             <MenuIcon
               sx={{
                 display: smallUp ? 'none' : 'inline-block',
-                fontSize: '1.3125rem!important',
+                fontSize: 'clamp(1rem, 1.5vw, 1.3125rem)!important',
               }}
             />
           ) : (
             <CloseIcon
               sx={{
                 display: smallUp ? 'none' : 'inline-block',
-                fontSize: '1.3125rem!important',
+                fontSize: 'clamp(1rem, 1.5vw, 1.3125rem)!important',
               }}
             />
           )}
@@ -113,8 +133,8 @@ const Header = () => {
         </Link>
         <Box
           component={motion.div}
-          animate={smallUp ? 'open' : isOpenMenu ? 'open' : 'closed'}
-          variants={variants}
+          animate={smallUp ? false : isOpenMenu ? 'open' : 'closed'}
+          variants={navWrapperVariants}
           sx={{
             position: smallUp ? 'static' : 'absolute',
             top: `${headerHeight}px`,
@@ -136,7 +156,9 @@ const Header = () => {
             }}
           >
             <Box
-              component="ul"
+              component={motion.ul}
+              variants={ulVariants}
+              animate={smallUp ? false : isOpenMenu ? 'open' : 'closed'}
               sx={{
                 display: smallUp ? 'flex' : 'block',
                 '& > li + li ': {
@@ -144,18 +166,20 @@ const Header = () => {
                 },
               }}
             >
-              <Box component="li">
+              <Box component={motion.li} variants={liVariants}>
                 <Link href="#">Home</Link>
               </Box>
-              <Box component="li">
+              <Box component={motion.li} variants={liVariants}>
                 <Link href="#">About</Link>
               </Box>
-              <Box component="li">
+              <Box component={motion.li} variants={liVariants}>
                 <Link href="#">Contact</Link>
               </Box>
             </Box>
             <Box
-              component="ul"
+              component={motion.ul}
+              variants={ulVariants}
+              animate={smallUp ? false : isOpenMenu ? 'open' : 'closed'}
               sx={{
                 display: smallUp ? 'flex' : 'block',
                 '& > li + li ': {
@@ -163,10 +187,10 @@ const Header = () => {
                 },
               }}
             >
-              <Box component="li">
+              <Box component={motion.li} variants={liVariants}>
                 <Link href="#">Sign In</Link>
               </Box>
-              <Box component="li">
+              <Box component={motion.li} variants={liVariants}>
                 <Link href="#">Sign Up</Link>
               </Box>
             </Box>
