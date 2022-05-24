@@ -1,5 +1,13 @@
-import { Box, Container, useTheme, Link, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Container,
+  useTheme,
+  Link,
+  useMediaQuery,
+  IconButton,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import logo from './img/logo.svg';
 import { useState, useEffect, useRef } from 'react';
 import { motion, useCycle } from 'framer-motion';
@@ -62,21 +70,37 @@ const Header = () => {
           padding: '1em 2em',
         }}
       >
-        <Box
+        <IconButton
+          aria-label="open button"
           sx={{
             display: smallUp ? 'none' : 'block',
             background: `${theme.palette.secondary.main}`,
             borderRadius: '50%',
             padding: '0.25em',
+            color: '#fff',
+            '&:hover, &:focus': {
+              backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            },
+            lineHeight: 0.6666667,
           }}
           onClick={handleClick}
         >
-          <MenuIcon
-            sx={{
-              display: smallUp ? 'none' : 'block',
-            }}
-          />
-        </Box>
+          {!isOpenMenu ? (
+            <MenuIcon
+              sx={{
+                display: smallUp ? 'none' : 'inline-block',
+                fontSize: '1.3125rem!important',
+              }}
+            />
+          ) : (
+            <CloseIcon
+              sx={{
+                display: smallUp ? 'none' : 'inline-block',
+                fontSize: '1.3125rem!important',
+              }}
+            />
+          )}
+        </IconButton>
         <Link
           href="#"
           sx={{
