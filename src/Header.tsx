@@ -133,6 +133,7 @@ const Header = () => {
         </Link>
         <Box
           component={motion.div}
+          initial={false}
           animate={smallUp ? false : isOpenMenu ? 'open' : 'closed'}
           variants={navWrapperVariants}
           sx={{

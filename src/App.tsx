@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
-import Header from './Header';
-import Hero from './Hero';
-import Aside from './Aside';
-import Primary from './Primary';
+const Header = React.lazy(() => import('./Header'));
+const Hero = React.lazy(() => import('./Hero'));
+const Aside = React.lazy(() => import('./Aside'));
+const Primary = React.lazy(() => import('./Primary'));
 
 export default function App() {
   return (
